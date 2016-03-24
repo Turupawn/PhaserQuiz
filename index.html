@@ -115,7 +115,8 @@ function create() {
     timer.start();
 
     $.get("http://kusuk.in/javascript_api/get_progress",{"user_id":1,"course_id":1},
-      function(data){
+      function(data)
+      {
         current_question=Number(data["current_question"]);
         if(current_question >= questions.length)
         {
@@ -180,6 +181,11 @@ function quizFinished()
   current_question=0;
   updateText();
   response_text.text="You finished the quiz!";
+  $.post("http://kusuk.in/javascript_api/unlock_achievement",{"user_id":1,"achievement_id":1},
+    function(data)
+    {
+      console.log(data)
+    })
 }
 
 function correctAnswer()
@@ -188,7 +194,8 @@ function correctAnswer()
   current_question= Number(current_question)+1;
   //API call: update progress by storing current_question
   $.post("http://kusuk.in/javascript_api/save_progress",{"user_id":1,"course_id":1,progress:{"current_question":current_question}},
-    function(data){
+    function(data)
+    {
       console.log(data)
       console.log("Stored the current question in Kusukin: "+current_question);
     })
