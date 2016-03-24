@@ -122,6 +122,7 @@ function create() {
         {
           current_question=0;
         }
+        console.log(data);
         console.log("Retreived the current question from Kusukin: "+current_question);
       })
 }
@@ -184,7 +185,8 @@ function quizFinished()
   $.post("http://kusuk.in/javascript_api/unlock_achievement",{"user_id":1,"achievement_id":1},
     function(data)
     {
-      console.log(data)
+      console.log(data);
+      console.log("Achievement unlocked!");
     })
 }
 
