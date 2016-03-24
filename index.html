@@ -113,7 +113,7 @@ function create() {
     timer.add(1500,updateText);
     timer.start();
 
-    $.get("http://kusuk.in/javascript_api/get_progress",{"user_id":1,"course_id":1,
+    $.get("http://kusuk.in/javascript_api/get_progress",{"user_id":1,"course_id":1},
       function(data){
         console.log(data)
       })
