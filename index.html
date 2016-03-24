@@ -121,6 +121,7 @@ function create() {
         {
           current_question=0;
         }
+        console.log("Retreived the current question from Kusukin: "+current_question);
       })
 }
 
@@ -189,6 +190,7 @@ function correctAnswer()
   $.post("http://kusuk.in/javascript_api/save_progress",{"user_id":1,"course_id":1,progress:{"current_question":current_question}},
     function(data){
       console.log(data)
+      console.log("Stored the current question in Kusukin: "+current_question);
     })
 }
 
