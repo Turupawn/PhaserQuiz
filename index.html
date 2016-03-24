@@ -4,7 +4,7 @@
         <meta charset="UTF-8" />
         <title>hello phaser!</title>
         <script src="phaser.min.js"></script>
-        <script src="jquery-1.12.0.min.js"></script>
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
     </head>
     <body>
 
@@ -116,7 +116,11 @@ function create() {
 
     $.get("http://kusuk.in/javascript_api/get_progress",{"user_id":1,"course_id":1},
       function(data){
-        console.log(data)
+        current_question=Number(data["current_question"]);
+        if(current_question >= questions.length)
+        {
+          current_question=0;
+        }
       })
 }
 
@@ -172,14 +176,20 @@ function buttonCPressed () {
 function quizFinished()
 {
   //API call: achievement unlock
+  current_question=0;
+  updateText();
   response_text.text="You finished the quiz!";
 }
 
 function correctAnswer()
 {
   response_text.text="Correct!";
-  current_question+=1;
+  current_question= Number(current_question)+1;
   //API call: update progress by storing current_question
+  $.post("http://kusuk.in/javascript_api/save_progress",{"user_id":1,"course_id":1,progress:{"current_question":current_question}},
+    function(data){
+      console.log(data)
+    })
 }
 
 function incorrectAnswer()
